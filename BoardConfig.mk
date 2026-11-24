@@ -101,3 +101,7 @@ BOARD_RAMDISK_USE_LZ4 := true
 TW_LOAD_VENDOR_MODULES := "panel_event_notifier.ko gh_irq_lend.ko gh_mem_notifier.ko i2c-msm-geni.ko xiaomi_touch.ko synaptics_tcm2.ko"
 TW_LOAD_VENDOR_BOOT_MODULES := true
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
+
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := tru

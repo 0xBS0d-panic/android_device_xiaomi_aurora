@@ -48,13 +48,15 @@ jobs:
         lunch twrp_aurora-eng
         mka recoveryimage
 
-    - name: Find crypto libs
+    - name: Check recovery libs
       if: always()
       run: |
         cd ~/fox
-        find out -iname "*keystore2*" -o -iname "*weaver*" -o -iname "libkeystoreinfo*" | head -80
-        echo "---- inside recovery ramdisk"
-        find out/target/product/aurora -path "*recovery/root*" \( -iname "*keystore*" -o -iname "*weaver*" -o -iname "*gatekeeper*" -o -iname "*keymint*" -o -iname "*keymaster*" \)
+        echo "---- three uncertain libs anywhere"
+        find out -name "android.security.apc-ndk_platform.so" -o -name "android.security.authorization-ndk_platform.so" -o -name "android.security.maintenance-ndk_platform.so"
+        echo "---- libtar deps missing in recovery ramdisk"
+        cd out/target/product/aurora/recovery/root/system/lib64
+        for l in $(readelf -d libtar.so | grep NEEDED | sed 's/.*\[\(.*\)\]/\1/'); do [ -e "$l" ] || echo "MISSING $l"; done
     
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4

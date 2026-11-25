@@ -49,9 +49,13 @@ jobs:
         mka recoveryimage
 
     - name: Find crypto libs
+      if: always()
       run: |
-        find out -iname "*keystore2*" -o -iname "*weaver*" -o -iname "libkeystoreinfo*" | head -50
-
+        cd ~/fox
+        find out -iname "*keystore2*" -o -iname "*weaver*" -o -iname "libkeystoreinfo*" | head -80
+        echo "---- inside recovery ramdisk"
+        find out/target/product/aurora -path "*recovery/root*" \( -iname "*keystore*" -o -iname "*weaver*" -o -iname "*gatekeeper*" -o -iname "*keymint*" -o -iname "*keymaster*" \)
+    
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:

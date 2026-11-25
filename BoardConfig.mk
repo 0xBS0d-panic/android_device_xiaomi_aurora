@@ -80,7 +80,6 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 16.1.0
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
@@ -97,16 +96,13 @@ OF_MAINTAINER := mls0x1
 
 BOARD_RAMDISK_USE_LZ4 := true
 
-# Touchscreen - load modules with proper dependency resolution via modules.dep
-TW_LOAD_VENDOR_MODULES := "panel_event_notifier.ko gh_irq_lend.ko gh_mem_notifier.ko i2c-msm-geni.ko xiaomi_touch.ko synaptics_tcm2.ko crypto-qti.ko ufshcd-crypti-qti.ko hwkm.ko"
+# Touchscreen & Crypto kernel modules - load with proper dependency resolution via modules.dep
+TW_LOAD_VENDOR_MODULES := "panel_event_notifier.ko gh_irq_lend.ko gh_mem_notifier.ko i2c-msm-geni.ko xiaomi_touch.ko synaptics_tcm2.ko crypto-qti.ko ufshcd-crypto-qti.ko hwkm.ko"
 TW_LOAD_VENDOR_BOOT_MODULES := true
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
-BOARD_USES_METADATA_PARTITION := true
-
 # Crypto / FBE / Metadata Encryption (SM8650)
+BOARD_USES_METADATA_PARTITION := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
@@ -115,6 +111,7 @@ BOARD_USES_QCOM_FBE_DECRYPTION := true
 PLATFORM_VERSION := 14.0.0
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
+VENDOR_SECURITY_PATCH := 2099-12-31
 BOOTLOADER_MESSAGE_OFFSET := 2048
 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \

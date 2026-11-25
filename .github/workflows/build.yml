@@ -37,7 +37,11 @@ jobs:
       run: |
         mkdir -p ~/fox/device/xiaomi/aurora
         cp -r $GITHUB_WORKSPACE/* ~/fox/device/xiaomi/aurora/
-
+    
+    - name: Find crypto libs
+      run: |
+        find out/target/product/aurora \( -name "android.system.keystore2-V1-ndk_platform.so" -o -name "android.hardware.weaver@1.0.so" -o -name "libkeystoreinfo.so" -o -name "android.security.apc-ndk_platform.so" \)
+    
     - name: Build
       run: |
         cd ~/fox

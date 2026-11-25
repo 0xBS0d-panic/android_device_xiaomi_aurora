@@ -48,16 +48,13 @@ jobs:
         lunch twrp_aurora-eng
         mka recoveryimage
 
-    - name: Check recovery libs
+    - name: Upload system libs
       if: always()
-      run: |
-        cd ~/fox
-        echo "---- three uncertain libs anywhere"
-        find out -name "android.security.apc-ndk_platform.so" -o -name "android.security.authorization-ndk_platform.so" -o -name "android.security.maintenance-ndk_platform.so"
-        echo "---- libtar deps missing in recovery ramdisk"
-        cd out/target/product/aurora/recovery/root/system/lib64
-        for l in $(readelf -d libtar.so | grep NEEDED | sed 's/.*\[\(.*\)\]/\1/'); do [ -e "$l" ] || echo "MISSING $l"; done
-    
+      uses: actions/upload-artifact@v4
+      with:
+        name: aurora-system-lib64
+        path: /home/runner/fox/out/target/product/aurora/system/lib64
+   
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:

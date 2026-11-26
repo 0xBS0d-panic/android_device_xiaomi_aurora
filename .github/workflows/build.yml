@@ -54,6 +54,10 @@ jobs:
     
     - name: Build
       run: |
+        sudo fallocate -l 12G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
         cd ~/fox
         export ALLOW_MISSING_DEPENDENCIES=true
         set +e
@@ -63,7 +67,7 @@ jobs:
         source build/envsetup.sh
         set -e
         lunch twrp_aurora-trunk_staging-eng || lunch twrp_aurora-ap2a-eng
-        mka recoveryimage
+        mka recoveryimage -j4
 
     - name: Upload system libs
       if: always()

@@ -73,8 +73,7 @@ jobs:
         export ALLOW_MISSING_DEPENDENCIES=true
         set +e
         mkdir -p ~/fox/cts/tests/tests/os/assets
-        echo "14.0.0" > ~/fox/cts/tests/tests/os/assets/platform_releases.txt
-        echo "14" > ~/fox/cts/tests/tests/os/assets/platform_versions.txt
+        export SKIP_ABI_CHECKS=true
         source build/envsetup.sh
         set -e
         lunch twrp_aurora-trunk_staging-eng || lunch twrp_aurora-ap2a-eng

@@ -1,9 +1,17 @@
 #!/system/bin/sh
+exec >/tmp/prepdecrypt.log 2>&1
+set -x
+
 SLOT=$(getprop ro.boot.slot_suffix)
 mkdir -p /firmware /vendor/firmware /mnt/vendor/persist /tmp/sys_mnt \
          /tmp/a14_env/system/lib64 /tmp/a14_env/system/bin \
          /tmp/a14_env/vendor /tmp/a14_env/dev /tmp/a14_env/proc \
          /tmp/a14_env/sys /tmp/a14_env/mnt/vendor/persist
+
+# Маппинг system из super, если ещё не создан
+if [ ! -e "/dev/block/mapper/system${SLOT}" ]; then
+    lptools_static map system${SLOT} 2>/dev/null || dmctl create system${SLOT} 2>/dev/null
+fi
 
 mount -o ro /dev/block/bootdevice/by-name/modem${SLOT} /firmware
 mount -o ro /vendor 2>/dev/null
@@ -11,8 +19,8 @@ mount -o bind /firmware/image /vendor/firmware
 mount /mnt/vendor/persist 2>/dev/null
 mount -o ro /dev/block/mapper/system${SLOT} /tmp/sys_mnt
 
-insmod /lib/modules/qcom_q6v5.ko 2>/dev/null
-insmod /lib/modules/qcom_q6v5_pas.ko 2>/dev/null
+insmod /vendor/lib/modules/qcom_q6v5.ko 2>/dev/null
+insmod /vendor/lib/modules/qcom_q6v5_pas.ko 2>/dev/null
 echo start > /sys/class/remoteproc/remoteproc0/state 2>/dev/null
 
 cp -a /tmp/sys_mnt/system/lib64/*.so /tmp/a14_env/system/lib64/

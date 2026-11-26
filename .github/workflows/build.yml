@@ -45,7 +45,7 @@ jobs:
         set +e
         source build/envsetup.sh
         set -e
-        lunch twrp_aurora-eng
+        lunch twrp_aurora-ap2a-eng
         mka recoveryimage
 
     - name: Upload system libs

@@ -46,13 +46,18 @@ jobs:
         git clone https://gitlab.com/OrangeFox/sync.git
         cd sync
         ./orangefox_sync.sh --branch 16.0 --path ~/fox
-        
+  
+    - name: Fix CrashRecovery APEX classpath in fox_16.0
+      run: |
+        cd /home/runner/fox
+        echo 'PRODUCT_APEX_SYSTEM_SERVER_JARS += com.android.crashrecovery:service-crashrecovery' >> build/make/target/product/base_system.mk
+            
     - name: Clone device tree
       run: |
         mkdir -p ~/fox/device/xiaomi/aurora
         cp -r $GITHUB_WORKSPACE/* ~/fox/device/xiaomi/aurora/
-    
-    - name: Build
+
+    - name: Create bigger swap for build
       run: |
         sudo swapoff -a
         sudo rm -f /swapfile
@@ -60,7 +65,10 @@ jobs:
         sudo fallocate -l 12G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile
-        sudo swapon /swapfile
+        sudo swapon /swapfile      
+    
+    - name: Build
+      run: |
         cd ~/fox
         export ALLOW_MISSING_DEPENDENCIES=true
         set +e

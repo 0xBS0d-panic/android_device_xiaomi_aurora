@@ -1,5 +1,6 @@
 #!/system/bin/sh
 exec >/tmp/prepdecrypt.log 2>&1
+sleep 3
 set -x
 
 SLOT=$(getprop ro.boot.slot_suffix)

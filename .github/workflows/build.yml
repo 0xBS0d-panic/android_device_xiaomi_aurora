@@ -54,6 +54,9 @@ jobs:
     
     - name: Build
       run: |
+        sudo swapoff -a
+        sudo rm -f /swapfile
+        df -h / /mnt
         sudo fallocate -l 12G /swapfile
         sudo chmod 600 /swapfile
         sudo mkswap /swapfile

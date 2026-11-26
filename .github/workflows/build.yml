@@ -25,6 +25,20 @@ jobs:
         git config --global user.name "Your Name"
         git config --global user.email "your.email@example.com"
 
+    - name: Free Disk Space
+      run: |
+        df -h /
+        sudo rm -rf /usr/share/dotnet \
+                    /usr/local/lib/android \
+                    /usr/share/swift \
+                    /usr/local/.ghcup \
+                    /usr/local/share/powershell \
+                    /usr/local/share/chromium \
+                    /opt/hostedtoolcache/CodeQL \
+                    /opt/az
+        sudo apt-get clean
+        df -h /
+    
     - name: Sync OrangeFox
       run: |
         mkdir -p ~/fox

@@ -45,7 +45,7 @@ jobs:
         cd ~/fox
         git clone https://gitlab.com/OrangeFox/sync.git
         cd sync
-        ./orangefox_sync.sh --branch 14.1 --path ~/fox
+        ./orangefox_sync.sh --branch 16.0 --path ~/fox
         
     - name: Clone device tree
       run: |

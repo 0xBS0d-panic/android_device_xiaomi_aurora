@@ -69,6 +69,7 @@ jobs:
           cd ~/fox
           export ALLOW_MISSING_DEPENDENCIES=true
           export SKIP_ABI_CHECKS=true
+          rm -rf ~/fox/cts
           source build/envsetup.sh
           cat build/release/release_config_map.mk build/release/release_config_map.textproto 2>/dev/null | head -n 40
           lunch twrp_aurora-bp2a-eng || lunch twrp_aurora-bp3a-eng || lunch twrp_aurora-bp1a-eng

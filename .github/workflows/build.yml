@@ -59,10 +59,10 @@ jobs:
 
       - name: Clone device tree
         run: |
+          rm -rf ~/fox/device/xiaomi/mondrian ~/fox/device/xiaomi/sm84xx-common
           mkdir -p ~/fox/device/xiaomi/aurora
           cp -a $GITHUB_WORKSPACE/. ~/fox/device/xiaomi/aurora/
           rm -rf ~/fox/device/xiaomi/aurora/.git ~/fox/device/xiaomi/aurora/.github
-          ls -la ~/fox/device/xiaomi/aurora/
 
       - name: Build
         run: |

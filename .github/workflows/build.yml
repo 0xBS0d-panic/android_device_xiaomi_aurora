@@ -70,9 +70,25 @@ jobs:
           export ALLOW_MISSING_DEPENDENCIES=true
           export SKIP_ABI_CHECKS=true
           rm -rf ~/fox/cts
+          python3 -c '
+          for p, mod in [
+              ("system/core/libsysutils/Android.bp", "libsysutils"),
+              ("external/libnl/Android.bp", "libnl"),
+           ]:
+              import os
+              if os.path.exists(p):
+                  s = open(p).read()
+                  if "recovery_available: true" not in s:
+                      s = s.replace(f"name: \"{mod}\",", f"name: \"{mod}\",\n    recovery_available: true,")
+                      open(p, "w").write(s)
+           '
           source build/envsetup.sh
           lunch twrp_aurora-bp2a-eng
           SKIP_ABI_CHECKS=true mka recoveryimage -j4
+          echo "=== Checking missing libs ==="
+          for lib in $(readelf -d ~/fox/out/target/product/aurora/recovery/root/system/bin/recovery | awk -F'[][]' '/NEEDED/{print $2}'); do
+            find ~/fox/out/target/product/aurora/recovery/root -name "$lib" | grep -q . || echo "MISSING: $lib"
+          done
            
       - name: Upload system libs
         if: always()

@@ -28,5 +28,4 @@ PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := false
 
 # Copy libsysutils and updated recovery.fstab into recovery ramdisk
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/system/lib64/libsysutils.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libsysutils.so \
     $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/recovery.fstab

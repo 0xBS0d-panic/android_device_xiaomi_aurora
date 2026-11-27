@@ -70,8 +70,9 @@ jobs:
           export ALLOW_MISSING_DEPENDENCIES=true
           export SKIP_ABI_CHECKS=true
           source build/envsetup.sh
-          REL=$(find build/release/flag_values/ -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -r | head -n 1)
-          echo "Detected release config: ${REL:-bp2a}"
+          cat build/release/release_config_map.mk build/release/release_config_map.textproto 2>/dev/null | head -n 40
+          lunch twrp_aurora-bp2a-eng || lunch twrp_aurora-bp3a-eng || lunch twrp_aurora-bp1a-eng
+          SKIP_ABI_CHECKS=true mka vendorbootimage -j4
           lunch twrp_aurora-${REL:-bp2a}-eng
           echo "Detected release config: ${REL:-bp2a}"
           lunch twrp_aurora-${REL:-bp2a}-eng

@@ -9,5 +9,4 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_aurora.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_aurora-trunk_staging-eng \
-    twrp_aurora-ap2a-eng
+    twrp_aurora-bp2a-eng

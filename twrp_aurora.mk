@@ -1,10 +1,3 @@
-#
-# Copyright (C) 2025 The Android Open Source Project
-# Copyright (C) 2025 SebaUbuntu's TWRP device tree generator
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-
 # Inherit from those products. Most specific first.
 PRODUCT_APEX_SYSTEM_SERVER_JARS += \
     com.android.crashrecovery:service-crashrecovery
@@ -32,3 +25,8 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 BUILD_FINGERPRINT := Xiaomi/aurorapro/aurora:14/UKQ1.240523.001/OS2.0.101.0.VNACNXM:user/release-keys
 
 PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := false
+
+# Copy libsysutils and updated recovery.fstab into recovery ramdisk
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/system/lib64/libsysutils.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libsysutils.so \
+    $(LOCAL_PATH)/recovery.fstab:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/recovery.fstab

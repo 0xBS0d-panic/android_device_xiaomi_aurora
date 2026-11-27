@@ -17,6 +17,9 @@ PRODUCT_PACKAGES += \
     bootctrl.pineapple
 
 PRODUCT_PACKAGES += \
+    libsysutils_recovery_prebuilt
+
+PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
     update_engine \

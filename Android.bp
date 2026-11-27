@@ -7,3 +7,14 @@
 
 soong_namespace {
 }
+
+cc_prebuilt_library_shared {
+    name: "libsysutils_recovery_prebuilt",
+    stem: "libsysutils",
+    recovery: true,
+    srcs: ["prebuilt/libsysutils.so"],
+    strip: {
+        none: true,
+    },
+    check_elf_files: false,
+}

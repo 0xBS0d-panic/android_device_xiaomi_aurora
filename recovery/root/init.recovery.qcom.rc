@@ -43,5 +43,3 @@ on property:hwservicemanager.ready=true
     start vendor.keymint-qti
     start vendor.gatekeeper_default
 
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    install_keyring

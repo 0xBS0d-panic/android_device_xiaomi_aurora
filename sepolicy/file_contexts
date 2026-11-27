@@ -1,0 +1,4 @@
+/vendor/bin/qseecomd                                              u:object_r:qseecomd_exec:s0
+/vendor/bin/hw/vendor\.qti\.hardware\.qseecom@1\.0-service        u:object_r:hal_keymint_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.security\.keymint-service-qti   u:object_r:hal_keymint_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.gatekeeper-service-qti          u:object_r:hal_gatekeeper_qti_exec:s0

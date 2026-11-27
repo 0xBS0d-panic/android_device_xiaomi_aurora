@@ -113,6 +113,22 @@
         <transport>hwbinder</transport>
         <fqname>@1.0::IMiwillService/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.security.keymint</name>
+        <version>3</version>
+        <fqname>IKeyMintDevice/default</fqname>
+    <fqname>IRemotelyProvisionedComponent/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.security.sharedsecret</name>
+        <version>1</version>
+        <fqname>ISharedSecret/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.security.secureclock</name>
+        <version>1</version>
+        <fqname>ISecureClock/default</fqname>
+    </hal>
     <sepolicy>
         <version>202604</version>
     </sepolicy>

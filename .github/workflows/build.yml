@@ -63,7 +63,7 @@ jobs:
           mkdir -p ~/fox/device/xiaomi/aurora
           cp -a $GITHUB_WORKSPACE/. ~/fox/device/xiaomi/aurora/
           rm -rf ~/fox/device/xiaomi/aurora/.git ~/fox/device/xiaomi/aurora/.github
-
+      
       - name: Build
         run: |
           cd ~/fox
@@ -71,14 +71,9 @@ jobs:
           export SKIP_ABI_CHECKS=true
           rm -rf ~/fox/cts
           source build/envsetup.sh
-          cat build/release/release_config_map.mk build/release/release_config_map.textproto 2>/dev/null | head -n 40
-          lunch twrp_aurora-bp2a-eng || lunch twrp_aurora-bp3a-eng || lunch twrp_aurora-bp1a-eng
-          SKIP_ABI_CHECKS=true mka vendorbootimage -j4
-          lunch twrp_aurora-${REL:-bp2a}-eng
-          echo "Detected release config: ${REL:-bp2a}"
-          lunch twrp_aurora-${REL:-bp2a}-eng
-          SKIP_ABI_CHECKS=true mka vendorbootimage -j4
-
+          lunch twrp_aurora-bp2a-eng
+          SKIP_ABI_CHECKS=true mka recoveryimage -j4
+           
       - name: Upload system libs
         if: always()
         uses: actions/upload-artifact@v4
@@ -91,5 +86,5 @@ jobs:
         with:
           name: OrangeFox-aurora
           path: |
-            ~/fox/out/target/product/aurora/vendor_boot.img
+            ~/fox/out/target/product/aurora/recovery.img
             ~/fox/out/target/product/aurora/OrangeFox*.zip

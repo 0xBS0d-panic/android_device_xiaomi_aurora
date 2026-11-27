@@ -1,9 +1,0 @@
-on boot
-    start prepdecrypt
-
-service prepdecrypt /system/bin/sh /system/bin/prepdecrypt.sh
-    user root
-    group root
-    disabled
-    oneshot
-    seclabel u:r:recovery:s0
